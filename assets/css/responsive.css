@@ -48,8 +48,20 @@
     display: none !important;
   }
 
-  .banner-carousel .image{
-    display: none;
+  .banner-carousel .image {
+    display: block;
+    max-width: 80%;
+    margin: 20px auto 0;
+  }
+  .banner-carousel .content-box h1{
+    font-size: 40px !important;
+    line-height: 50px !important;
+  }
+  .banner-carousel .content-box h2 {
+    font-size: 18px !important;
+  }
+  .banner-carousel .content-box h3 {
+    font-size: 26px !important;
   }
 
   .banner-carousel .content-box{
