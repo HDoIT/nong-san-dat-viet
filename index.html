@@ -3255,6 +3255,55 @@
             document.head.appendChild(script);
         });
     </script>
+    <!-- QR Welcome Intro -->
+    <div id="qr-welcome-intro" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, #1a2a1a 0%, #050a05 100%); z-index: 999999; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: opacity 1s ease-in-out;">
+        <div class="glow-effect" style="position: absolute; width: 350px; height: 350px; background: rgba(212, 175, 55, 0.15); border-radius: 50%; filter: blur(70px); animation: pulseGlow 3s infinite alternate;"></div>
+        <img src="assets/images/Logo ung dung (transparent) - Copy.png" alt="Đại Việt Logo" style="max-width: 250px; z-index: 2; margin-bottom: 25px; animation: floatLogo 4s ease-in-out infinite; filter: drop-shadow(0 0 20px rgba(212,175,55,0.4));">
+        <h2 style="color: #d4af37; font-family: 'Times New Roman', serif; font-size: 32px; text-transform: uppercase; letter-spacing: 4px; text-align: center; z-index: 2; text-shadow: 0 2px 15px rgba(0,0,0,0.8); margin: 0 20px;">Quốc Bảo Sâm Ngọc Linh</h2>
+        <p style="color: #c0c0c0; font-family: Arial, sans-serif; font-size: 17px; margin-top: 15px; margin-bottom: 45px; text-align: center; z-index: 2; font-style: italic; letter-spacing: 1px;">Tinh hoa đại ngàn - Món quà sức khỏe vô giá</p>
+        <button onclick="enterSite()" style="z-index: 2; padding: 15px 45px; font-size: 16px; font-weight: bold; color: #fff; background: linear-gradient(45deg, #b8860b, #daa520, #b8860b); background-size: 200% 200%; border: 1px solid #d4af37; border-radius: 30px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 5px 20px rgba(212,175,55,0.5); transition: transform 0.3s, box-shadow 0.3s; animation: gradientShift 3s ease infinite;">Khám Phá Ngay</button>
+        <style>
+            @keyframes pulseGlow {
+                0% { transform: scale(0.8); opacity: 0.5; }
+                100% { transform: scale(1.2); opacity: 1; }
+            }
+            @keyframes floatLogo {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            #qr-welcome-intro button:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 30px rgba(212,175,55,0.8);
+            }
+        </style>
+    </div>
+    <script>
+        // Check if user came from QR
+        if (window.location.search.includes('ref=qr')) {
+            const intro = document.getElementById('qr-welcome-intro');
+            intro.style.display = 'flex';
+            // Slight delay to allow display:flex to render before changing opacity for transition
+            setTimeout(() => {
+                intro.style.opacity = '1';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }, 100);
+        }
+
+        function enterSite() {
+            const intro = document.getElementById('qr-welcome-intro');
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.style.display = 'none';
+                document.body.style.overflow = ''; // Restore scrolling
+            }, 1000);
+        }
+    </script>
 </body><!-- End of .page_wrapper -->
 
 </html>
