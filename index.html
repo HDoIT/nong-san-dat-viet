@@ -3312,11 +3312,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             const orderForm = document.querySelector('.quick-order-form');
             if (orderForm) {
-                orderForm.addEventListener('submit', function(e) {
+                // Đảm bảo không bị đính kèm nhiều sự kiện submit
+                orderForm.onsubmit = function(e) {
                     e.preventDefault(); // Ngăn chặn tải lại trang
                     
                     const submitBtn = document.querySelector('.quick-submit-btn');
                     const originalBtnText = submitBtn.innerHTML;
+                    
+                    function resetButton() {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.pointerEvents = 'auto';
+                    }
                     
                     // Kiểm tra xem đã chọn sản phẩm chưa
                     const checkedProducts = document.querySelectorAll('input[name="quick-product"]:checked');
@@ -3353,7 +3360,7 @@
                     // URL Google Apps Script
                     const scriptURL = 'https://script.google.com/macros/s/AKfycbzfjwJX1sRFfcYgXMHsSf8GNK_Ug6HKnTO9G9EnKd3kGGHmtJYF-pFg-kd7u3sfcxmN/exec';
                     
-                    fetch(scriptURL, { method: 'POST', body: formData })
+                    fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
                         .then(response => {
                             Swal.fire({
                                 icon: 'success',
@@ -3363,6 +3370,7 @@
                                 confirmButtonText: 'Tuyệt vời'
                             });
                             orderForm.reset();
+                            resetButton();
                         })
                         .catch(error => {
                             Swal.fire({
@@ -3372,14 +3380,9 @@
                                 confirmButtonColor: '#d33'
                             });
                             console.error('Error!', error.message);
-                        })
-                        .finally(() => {
-                            // Khôi phục nút bấm
-                            submitBtn.innerHTML = originalBtnText;
-                            submitBtn.style.opacity = '1';
-                            submitBtn.style.pointerEvents = 'auto';
+                            resetButton();
                         });
-                });
+                };
             }
         });
     </script>
