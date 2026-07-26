@@ -344,10 +344,13 @@
    }
 
    .handle-preloader .animation-preloader .txt-loading .letters-loading {
-     font-size: 40px;
-     letter-spacing: 10px;
-   }
- }
+    font-size: 24px;
+    letter-spacing: 5px;
+  }
+  .handle-preloader .animation-preloader .txt-loading {
+    white-space: nowrap;
+  }
+}
 
 
  .centred {
