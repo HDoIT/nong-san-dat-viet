@@ -3306,6 +3306,83 @@
             }, 1000);
         }
     </script>
+    <!-- Cấu hình Gửi Form Đặt Hàng về Google Sheet -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderForm = document.querySelector('.quick-order-form');
+            if (orderForm) {
+                orderForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Ngăn chặn tải lại trang
+                    
+                    const submitBtn = document.querySelector('.quick-submit-btn');
+                    const originalBtnText = submitBtn.innerHTML;
+                    
+                    // Kiểm tra xem đã chọn sản phẩm chưa
+                    const checkedProducts = document.querySelectorAll('input[name="quick-product"]:checked');
+                    if(checkedProducts.length === 0) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Thiếu thông tin',
+                            text: 'Vui lòng chọn ít nhất 1 sản phẩm để đặt hàng!',
+                            confirmButtonColor: '#205a2e'
+                        });
+                        return;
+                    }
+                    
+                    let productNames = [];
+                    checkedProducts.forEach(prod => {
+                        productNames.push(prod.parentElement.querySelector('h4').innerText);
+                    });
+                    
+                    // Đổi trạng thái nút thành Đang Gửi
+                    submitBtn.innerHTML = '<span>ĐANG XỬ LÝ... <i class="fa fa-spinner fa-spin" style="margin-left:10px;"></i></span>';
+                    submitBtn.style.opacity = '0.7';
+                    submitBtn.style.pointerEvents = 'none';
+
+                    // Tạo dữ liệu gửi đi
+                    const formData = new FormData();
+                    formData.append('fullname', document.getElementById('quick-fullname').value);
+                    formData.append('phone', document.getElementById('quick-phone').value);
+                    formData.append('email', document.getElementById('quick-email').value || '');
+                    formData.append('quanty', document.getElementById('quick-quanty').value);
+                    formData.append('address', document.getElementById('quick-address').value);
+                    formData.append('note', document.getElementById('quick-note').value || '');
+                    formData.append('products', productNames.join(' + '));
+                    
+                    // URL Google Apps Script
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbzfjwJX1sRFfcYgXMHsSf8GNK_Ug6HKnTO9G9EnKd3kGGHmtJYF-pFg-kd7u3sfcxmN/exec';
+                    
+                    fetch(scriptURL, { method: 'POST', body: formData })
+                        .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Đặt hàng thành công!',
+                                text: 'Cảm ơn quý khách. Chúng tôi sẽ gọi lại trong thời gian sớm nhất để xác nhận đơn hàng.',
+                                confirmButtonColor: '#205a2e',
+                                confirmButtonText: 'Tuyệt vời'
+                            });
+                            orderForm.reset();
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Có lỗi xảy ra',
+                                text: 'Không thể gửi đơn hàng lúc này, vui lòng liên hệ qua Zalo/SĐT!',
+                                confirmButtonColor: '#d33'
+                            });
+                            console.error('Error!', error.message);
+                        })
+                        .finally(() => {
+                            // Khôi phục nút bấm
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.style.opacity = '1';
+                            submitBtn.style.pointerEvents = 'auto';
+                        });
+                });
+            }
+        });
+    </script>
 </body><!-- End of .page_wrapper -->
 
 </html>
