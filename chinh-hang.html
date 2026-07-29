@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác Thực Hàng Chính Hãng</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Xác Thực Thành Công - Nông Sản Đại Việt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        :root {
+            --dark-green: #295632;
+            --light-green: #3a9c40;
+            --bg-cream: #FDFBF4;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --text-light-gray: #888888;
+            --icon-green: #769E6E;
+            --icon-bg: #F0F6EF;
+            --border-color: #EEEEEE;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,227 +27,411 @@
         }
 
         body {
-            background-color: #ffffff;
-            color: #333;
-            max-width: 480px; /* Mobile width constraint to match app feel */
-            margin: 0 auto;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
             min-height: 100vh;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            /* Subtle radial gradients to mimic the golden dust/light in the background */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(226, 203, 142, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(226, 203, 142, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(138, 182, 126, 0.1) 0%, transparent 30%);
         }
 
-        /* VNPT Check style header */
         .header {
-            background-color: #0b4fcc;
-            color: white;
-            padding: 12px 16px;
+            background-color: var(--dark-green);
+            height: 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-box {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            padding: 10px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            justify-content: center;
         }
 
-        .header-left i {
-            font-size: 18px;
-            opacity: 0.9;
+        .logo-box img {
+            height: 45px;
+            object-fit: contain;
         }
 
-        .header-right {
+        .main-content {
+            flex: 1;
+            padding: 70px 20px 40px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 6px;
-            background-color: rgba(0, 0, 0, 0.15);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: 500;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        .success-section {
-            padding: 40px 20px 25px;
-            text-align: center;
-        }
-
-        .check-circle {
-            width: 100px;
-            height: 100px;
-            border: 5px solid #63b34b;
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light-green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(58, 156, 64, 0.2);
         }
 
-        .check-circle i {
-            font-size: 60px;
-            color: #63b34b;
+        .success-icon i {
+            color: white;
+            font-size: 40px;
         }
 
-        .title {
-            font-size: 20px;
-            color: #555;
-            font-weight: 500;
-            margin-bottom: 10px;
-            letter-spacing: 0.3px;
-        }
-
-        .subtitle {
-            font-size: 14px;
-            color: #999;
-            font-style: italic;
-        }
-
-        .product-card {
-            background-color: #fdf5f9;
-            padding: 20px 20px 25px;
-            border-top: 1px solid #f2e8ef;
-            border-bottom: 1px solid #f2e8ef;
-        }
-
-        .product-name {
-            color: #d13041;
-            font-size: 16px;
+        .page-title {
+            color: var(--dark-green);
+            font-size: 24px;
             font-weight: 700;
             margin-bottom: 8px;
             text-transform: uppercase;
-        }
-
-        .product-code {
-            color: #666;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .btn-sm {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background-color: #7dcf72;
-            color: white;
-            padding: 7px 14px;
-            border-radius: 3px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
-        .btn-block {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: #5ab551;
-            color: white;
-            padding: 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            width: 100%;
-        }
-
-        .rating-section {
-            background-color: #f3f3f9;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid #e2e2ec;
-        }
-
-        .rating-text {
-            color: #5c6bc0;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .stars {
-            display: flex;
-            gap: 5px;
-        }
-
-        .stars i {
-            color: #8c9eff;
-            font-size: 16px;
-        }
-
-        .info-section {
-            padding: 25px 20px;
-            text-align: center;
-        }
-
-        .info-title {
-            font-size: 16px;
-            color: #666;
-            font-weight: 500;
-            margin: 15px 0;
             letter-spacing: 0.5px;
         }
 
-        .info-logo {
-            max-width: 160px;
-            height: auto;
-            margin: 10px auto 25px;
-            display: block;
+        .page-subtitle {
+            color: var(--text-dark);
+            font-size: 16px;
+            margin-bottom: 35px;
+            font-weight: 400;
         }
 
-        .decorative-line {
-            height: 1px;
-            border-top: 2px dashed #d1d5db;
-            margin: 0;
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            width: 100%;
+            padding: 30px;
+        }
+
+        /* Top section: Product Image & Info */
+        .product-section {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .product-image {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+
+        .feature-item i {
+            color: var(--icon-green);
+            width: 24px;
+            font-size: 16px;
+        }
+
+        .code-highlight {
+            color: var(--dark-green);
+            font-weight: 700;
+        }
+
+        /* Middle section: Info Grid */
+        .info-grid {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            padding: 20px 0;
+            margin-bottom: 25px;
+        }
+
+        .info-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+            padding: 0 15px;
+        }
+
+        .info-col:last-child {
+            border-right: none;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--icon-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .icon-circle i {
+            color: var(--icon-green);
+            font-size: 18px;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: var(--text-gray);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 13px;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+
+        .info-value.bold {
+            font-weight: 600;
+        }
+
+        .info-status {
+            font-size: 13px;
+            color: var(--light-green);
+            font-weight: 500;
+        }
+
+        /* Bottom section: Note & Buttons */
+        .thank-you-note {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-light-gray);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--dark-green);
+            color: var(--dark-green);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(41, 86, 50, 0.05);
+        }
+
+        .btn-solid {
+            background-color: var(--dark-green);
+            border: 1px solid var(--dark-green);
+            color: white;
+        }
+
+        .btn-solid:hover {
+            background-color: #204527;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-green);
+            color: #d1ddd3;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-item i {
+            font-size: 16px;
+            color: white;
+        }
+        
+        .footer-item span {
+            color: #e5eee6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            .feature-item {
+                justify-content: center;
+            }
+            .info-grid {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+            .info-col {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 20px;
+            }
+            .info-col:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="header-left">
-            <i class="fas fa-barcode"></i>
-        </div>
-        <div class="header-right">
-            <span>🇻🇳 Tiếng Việt</span>
-            <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+        <div class="logo-box">
+            <img src="assets/images/logo.png" alt="Nông Sản Đại Việt" onerror="this.src='assets/images/Logo ung dung (transparent).png'">
         </div>
     </header>
 
-    <main>
-        <div class="success-section">
-            <div class="check-circle">
-                <i class="fas fa-check"></i>
+    <main class="main-content">
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <h1 class="page-title">Xác thực thành công</h1>
+        <p class="page-subtitle">Sản phẩm chính hãng từ Nông Sản Đại Việt</p>
+
+        <div class="card">
+            <!-- Product Info -->
+            <div class="product-section">
+                <img src="assets/images/products/sam-ngoc-linh-mat-ong.jpg" alt="Sâm Ngọc Linh Mật Ong" class="product-image" onerror="this.src='assets/images/logo.png'">
+                <div class="product-details">
+                    <h2 class="product-name">SÂM NGỌC LINH NGÂM MẬT ONG ĐẠI VIỆT</h2>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-map-marker-alt"></i> Phân phối chính hãng bởi Nông Sản Đại Việt
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-file-contract"></i> Đạt chuẩn chất lượng ISO 22000:2018
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-qrcode"></i> Mã xác thực: <span class="code-highlight">&nbsp;DV12345678</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <h1 class="title">SẢN PHẨM CHÍNH HÃNG</h1>
-            <p class="subtitle">Xin cảm ơn bạn đã mua hàng!</p>
-        </div>
 
-        <div class="product-card">
-            <h2 class="product-name">Sâm Mật Ong Đại Việt</h2>
-            <p class="product-code">Mã SP: 01613561827237</p>
-            
-            <a href="index.html#product" class="btn-sm">
-                Xem thêm <i class="fas fa-chevron-circle-right"></i>
-            </a>
-            
-            <a href="index.html#order" class="btn-block">
-                <i class="fas fa-shopping-cart"></i> Mua sản phẩm
-            </a>
-        </div>
-
-        <div class="rating-section">
-            <span class="rating-text">Đánh giá & Bình luận:</span>
-            <div class="stars">
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
+            <!-- Validation Info Grid -->
+            <div class="info-grid">
+                <div class="info-col">
+                    <div class="icon-circle">
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <div class="info-label">Ngày kích hoạt</div>
+                    <div class="info-value bold">20/05/2025 10:11</div>
+                    <div class="info-status">Lần đầu tiên</div>
+                </div>
+                <div class="info-col">
+                    <div class="icon-circle">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-label">Nguồn gốc</div>
+                    <div class="info-value bold">Nông Sản Đại Việt</div>
+                    <div class="info-value">Việt Nam</div>
+                </div>
+                <div class="info-col">
+                    <div class="icon-circle">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="info-label">Tình trạng</div>
+                    <div class="info-status">Còn hiệu lực</div>
+                </div>
             </div>
-        </div>
 
-        <div class="info-section">
-            <div class="decorative-line"></div>
-            <h3 class="info-title">THÔNG TIN SẢN PHẨM</h3>
-            <img src="assets/images/logo.png" alt="Đại Việt" class="info-logo" onerror="this.src='assets/images/Logo ung dung (transparent).png'">
-            <div class="decorative-line"></div>
+            <!-- Footer Note -->
+            <p class="thank-you-note">
+                Cảm ơn quý khách đã tin dùng sản phẩm của Nông Sản Đại Việt.<br>
+                Mọi thông tin chi tiết vui lòng liên hệ để được hỗ trợ.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="index.html#product" class="btn btn-outline">
+                    <i class="fas fa-link"></i> Tìm hiểu thêm về sản phẩm
+                </a>
+                <a href="index.html#order" class="btn btn-solid">
+                    <i class="fas fa-shopping-cart"></i> Mua ngay chính hãng
+                </a>
+            </div>
         </div>
     </main>
+
+    <footer class="footer">
+        <div class="footer-item">
+            <i class="fas fa-globe"></i>
+            <span>Website: nongsandaiviet.vn</span>
+        </div>
+        <div class="footer-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>Hotline: 1900 888 686</span>
+        </div>
+        <div class="footer-item">
+            <i class="fas fa-envelope"></i>
+            <span>Email: cskh@nongsandaiviet.vn</span>
+        </div>
+    </footer>
 </body>
 </html>
