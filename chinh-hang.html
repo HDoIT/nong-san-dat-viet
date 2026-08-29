@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Thực Thành Công - Nông Sản Đại Việt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --dark-green: #295632;
+            --light-green: #3a9c40;
+            --bg-cream: #FDFBF4;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --text-light-gray: #888888;
+            --icon-green: #769E6E;
+            --icon-bg: #F0F6EF;
+            --border-color: #EEEEEE;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            /* Subtle radial gradients to mimic the golden dust/light in the background */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(226, 203, 142, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(226, 203, 142, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(138, 182, 126, 0.1) 0%, transparent 30%);
+        }
+
+        .header {
+            background-color: var(--dark-green);
+            height: 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-box {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            padding: 10px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-box img {
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 70px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(58, 156, 64, 0.2);
+        }
+
+        .success-icon i {
+            color: white;
+            font-size: 40px;
+        }
+
+        .page-title {
+            color: var(--dark-green);
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .page-subtitle {
+            color: var(--text-dark);
+            font-size: 20px;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            width: 100%;
+            padding: 30px;
+        }
+
+        /* Top section: Product Image & Info */
+        .product-section {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .product-image {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 17px;
+            color: var(--text-gray);
+        }
+
+        .feature-item i {
+            color: var(--icon-green);
+            width: 28px;
+            font-size: 19px;
+        }
+
+        .code-highlight {
+            color: var(--dark-green);
+            font-weight: 700;
+        }
+
+        /* Middle section: Info Grid */
+        .info-grid {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            padding: 20px 0;
+            margin-bottom: 25px;
+        }
+
+        .info-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+            padding: 0 15px;
+        }
+
+        .info-col:last-child {
+            border-right: none;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--icon-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .icon-circle i {
+            color: var(--icon-green);
+            font-size: 18px;
+        }
+
+        .info-label {
+            font-size: 16px;
+            color: var(--text-gray);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+
+        .info-value.bold {
+            font-weight: 600;
+        }
+
+        .info-status {
+            font-size: 16px;
+            color: var(--light-green);
+            font-weight: 500;
+        }
+
+        /* Bottom section: Note & Buttons */
+        .thank-you-note {
+            text-align: center;
+            font-size: 16px;
+            color: var(--text-light-gray);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--dark-green);
+            color: var(--dark-green);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(41, 86, 50, 0.05);
+        }
+
+        .btn-solid {
+            background-color: var(--dark-green);
+            border: 1px solid var(--dark-green);
+            color: white;
+        }
+
+        .btn-solid:hover {
+            background-color: #204527;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-green);
+            color: #d1ddd3;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-item i {
+            font-size: 16px;
+            color: white;
+        }
+        
+        .footer-item span {
+            color: #e5eee6;
+        }
+
+        .success-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 15px rgba(58, 156, 64, 0.2));
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                height: 55px;
+            }
+            .logo-box {
+                bottom: -20px;
+                padding: 6px 15px;
+            }
+            .logo-box img {
+                height: 35px;
+            }
+            .main-content {
+                padding: 50px 15px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0 auto;
+            }
+            .success-icon {
+                margin-bottom: 12px;
+            }
+            .success-img {
+                width: 170px;
+                height: 170px;
+            }
+            .page-title {
+                font-size: 22px;
+                margin-bottom: 4px;
+            }
+            .page-subtitle {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+            .card {
+                padding: 12px 10px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            }
+            .product-section {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+            .product-image {
+                width: 75px;
+                height: 75px;
+            }
+            .product-name {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+            .feature-item {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+            .feature-item i {
+                width: 20px;
+                font-size: 13px;
+            }
+            .info-grid {
+                flex-direction: row;
+                gap: 0;
+                padding: 10px 0;
+                margin-bottom: 12px;
+            }
+            .info-col {
+                border-right: 1px solid var(--border-color);
+                border-bottom: none;
+                padding: 0 5px;
+            }
+            .info-col:last-child {
+                border-right: none;
+                padding-bottom: 0;
+            }
+            .icon-circle {
+                width: 28px;
+                height: 28px;
+                margin-bottom: 6px;
+            }
+            .icon-circle i {
+                font-size: 12px;
+            }
+            .info-label {
+                font-size: 12px;
+            }
+            .info-value, .info-status {
+                font-size: 13px;
+            }
+            .thank-you-note {
+                font-size: 13px;
+                margin-bottom: 12px;
+                line-height: 1.4;
+            }
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .btn {
+                padding: 14px 12px;
+                font-size: 15px;
+                border-radius: 8px;
+                gap: 8px;
+            }
+            .footer {
+                flex-direction: row;
+                gap: 5px;
+                padding: 12px 10px;
+                font-size: 9px;
+                justify-content: space-between;
+            }
+            .footer-item {
+                flex-direction: column;
+                gap: 4px;
+                text-align: center;
+            }
+            .footer-item i {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-box">
+            <img src="assets/images/logoqr.jpg" alt="Nông Sản Đại Việt" onerror="this.src='assets/images/Logo ung dung (transparent).png'">
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="success-icon" style="background-color: transparent; box-shadow: none; width: auto; height: auto;">
+            <img src="assets/images/check.png" alt="Thành công" class="success-img">
+        </div>
+        <h1 class="page-title">Xác thực thành công</h1>
+        <p class="page-subtitle">Sản phẩm chính hãng từ Nông Sản Đại Việt</p>
+
+        <div class="card">
+            <!-- Product Info -->
+            <div class="product-section">
+                <img src="assets/images/resource/about-1.png" alt="Sâm Ngọc Linh Mật Ong" class="product-image" onerror="this.src='assets/images/logoqr.jpg'">
+                <div class="product-details">
+                    <h2 class="product-name">SÂM NGỌC LINH NGÂM MẬT ONG ĐẠI VIỆT</h2>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-map-marker-alt"></i> Phân phối chính hãng bởi Nông Sản Đại Việt
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-file-contract"></i> Kiểm nghiệm sản phẩm tại Viện Kiểm Nghiệm ATVSTP Quốc Gia
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-qrcode"></i> Mã xác thực: <span class="code-highlight">&nbsp;DV-893601422114</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Validation Info Grid -->
+            <div class="info-grid">
+                <div class="info-col">
+                    <div class="icon-circle">
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <div class="info-label">Ngày kích hoạt</div>
+                    <div class="info-value bold">01/09/2026</div>
+                    <div class="info-status">Lần đầu tiên</div>
+                </div>
+                <div class="info-col">
+                    <div class="icon-circle">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-label">Nguồn gốc</div>
+                    <div class="info-value bold">Nông Sản Đại Việt</div>
+                    <div class="info-value">Việt Nam</div>
+                </div>
+                <div class="info-col">
+                    <div class="icon-circle">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="info-label">Tình trạng</div>
+                    <div class="info-status">Còn hiệu lực</div>
+                </div>
+            </div>
+
+            <!-- Footer Note -->
+            <p class="thank-you-note">
+                Cảm ơn quý khách đã tin dùng sản phẩm của Nông Sản Đại Việt.<br>
+                Mọi thông tin chi tiết vui lòng liên hệ để được hỗ trợ.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="index.html#product" class="btn btn-outline">
+                    <i class="fas fa-link"></i> Tìm hiểu thêm về sản phẩm
+                </a>
+                <a href="index.html#order" class="btn btn-solid">
+                    <i class="fas fa-shopping-cart"></i> Mua ngay chính hãng
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-item">
+            <i class="fas fa-globe"></i>
+            <span>Website: nongsandaiviet.shop</span>
+        </div>
+        <div class="footer-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>Hotline: 0876 651 651</span>
+        </div>
+        <div class="footer-item">
+            <i class="fas fa-envelope"></i>
+            <span>Email: info@daiviet.com</span>
+        </div>
+    </footer>
+</body>
+</html>
