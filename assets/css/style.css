@@ -7567,7 +7567,10 @@
    margin: auto;
    display: block;
    max-width: 90%;
-   max-height: 90%;
+   max-height: 85vh;
+   object-fit: contain;
+   width: auto;
+   height: auto;
  }
 
  .close {
