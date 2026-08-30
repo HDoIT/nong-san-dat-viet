@@ -63,8 +63,13 @@
     right: auto !important;
     order: 4;
     display: block !important;
-    max-width: 100%;
+    max-width: 70% !important;
     margin: 20px auto 30px !important;
+  }
+
+  .banner-carousel .image img {
+    max-width: 100%;
+    height: auto;
   }
 
   .banner-carousel .content-box .btn-box {

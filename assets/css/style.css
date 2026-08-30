@@ -1748,6 +1748,7 @@
    position: absolute;
    bottom: -100px;
    right: -135px;
+   max-width: 45%;
    opacity: 0;
    -webkit-transform: translateX(100px);
    -moz-transform: translateX(100px);
@@ -1759,6 +1760,11 @@
    -ms-transition: all 1000ms ease;
    -o-transition: all 1000ms ease;
    transition: all 1000ms ease;
+ }
+
+ .banner-carousel .image img {
+   max-width: 100%;
+   height: auto;
  }
 
  .banner-carousel .active .image {
